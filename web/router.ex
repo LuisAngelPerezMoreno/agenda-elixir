@@ -11,8 +11,11 @@ defmodule AgendaElixir.Router do
 
     resources "/users", UserController
     options   "/users", UserController, :options
+    options   "/users/:id", UserController, :options
     get "/users", UserController, :index
     get "/users/:id", UserController, :show
     post "/users", UserController, :create
+    put "/users/:id", UserController, :update
+    delete "/users/:id", UserController, :delete
   end
 end

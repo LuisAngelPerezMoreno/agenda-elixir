@@ -24,4 +24,32 @@ defmodule AgendaElixir.UserController do
     end
   end
 
+  def update(conn, %{"id" => id} = params) do
+    user = Repo.get(AgendaElixir.User, id)
+    if user do
+      changeset = AgendaElixir.User.changeset(user, params)
+      case Repo.update(changeset) do
+        {:ok, user} ->
+          json conn |> put_status(:ok), user
+        {:error, result} ->
+          json conn |> put_status(:bad_request),
+               %{errors: ["bad update"] }
+      end
+    else
+      json conn |> put_status(:not_found),
+           %{errors: ["invalid user"] }
+    end
+  end
+
+  def delete(conn, %{"id" => id}) do
+    user = Repo.get(AgendaElixir.User, id)
+    case Repo.delete(user) do
+      {:ok, user} ->
+        json conn |> put_status(:ok), user
+      {:error, result} ->
+        json conn |> put_status(:bad_request),
+             %{errors: ["bad delete"] }
+    end
+  end
+
 end
