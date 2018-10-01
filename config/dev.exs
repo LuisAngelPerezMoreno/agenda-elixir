@@ -36,9 +36,8 @@ config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
 config :agenda_elixir, AgendaElixir.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "agenda_elixir_dev",
-  hostname: "localhost",
-  pool_size: 10
+  adapter: Ecto.Adapters.MySQL,
+  username: "root",
+  password: "root",
+  database: "agenda",
+  hostname: "localhost"

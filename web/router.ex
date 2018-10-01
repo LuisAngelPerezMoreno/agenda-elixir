@@ -5,7 +5,10 @@ defmodule AgendaElixir.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", AgendaElixir do
+  scope "/api/v1", AgendaElixir do
     pipe_through :api
+
+    get "/users", UserController, :index
+    get "/users/:id", UserController, :show
   end
 end
